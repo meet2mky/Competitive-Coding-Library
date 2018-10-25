@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int numDiv(int num ){
+  int cnt=0;
+  int lim = sqrt((double)num);
+  for(int i=1;i<=lim;i++){
+      if(num%i==0){
+          if(num/i == i)cnt--;
+          cnt+=2;
+      }
+    }
+   return cnt;
+}
+int main(){
+  cout << numDiv(100) ;
+  return 0;
+}

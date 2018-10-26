@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 1e5;
+vector<int> g[N];
+vector<int> color(N);
+vector<int> comp_id(N);
+vector<int> order;
+vector<int> rg[N];
+int n,m,a,b,sccnum;
+void initialize(){
+    fill(color.begin(),color.end(),-1);
+    fill(comp_id.begin(),comp_id.end(),-1);
+    for(int i = 0; i < N; i++){
+        rg[i].clear();
+        g[i].clear();
+    }
+    order.clear();
+    n = m = a = b = sccnum = 0;
+}
+void read(){
+    initialize();
+    cin >> n >> m;
+    assert(n<N);
+    for(int i = 1; i <= m; ++i){
+        cin >> a >> b;
+        g[a].push_back(b);
+        rg[b].push_back(a);
+    }
+}
+void dfs1(int u){
+    color[u] = 1;
+    for(auto v: g[u]){
+        if(color[v] == -1){
+            dfs1(v);    
+        }    
+    }
+    order.push_back(u);
+    color[u] = 2;
+}
+void dfs2(int u){
+    color[u] = 1;
+    cout << u << ' ';
+    comp_id[u] = sccnum;
+    for(auto v: rg[u]){
+        if(color[v] == -1){
+            dfs2(v);    
+        }
+    }
+    color[u] = 2;
+}
+void kosaraju(){
+    read();
+    for(int i = 1; i <= n; i++){
+        if(color[i] == -1){
+            dfs1(i);
+        }    
+    }
+    reverse(order.begin(),order.end());
+    fill(color.begin(),color.end(),-1);
+    for(auto v: order){
+        if(color[v]==-1){
+            ++sccnum;
+            dfs2(v);
+            puts("");
+        }
+    }
+    cout << "SCC count is: " << sccnum;
+}
+int main(){
+    kosaraju();
+    return 0;
+}

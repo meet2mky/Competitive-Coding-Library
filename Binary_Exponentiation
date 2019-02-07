@@ -1,0 +1,18 @@
+/* Program to find the exponent of a number in logarithmic time */
+/* Careful with large values becuase of overflow */
+
+#include<bits/stdc++.h>
+using namespace std;
+int bin_exp(int a, int n){
+  int res = 1;
+  while(n > 0){
+    if(n&1) res *= a;
+    a *= a;
+    n/=2;
+  }
+  return res;
+}
+int main(){
+  cout << "4^6 is: " << bin_exp(4,6) << endl;
+  return 0;
+}

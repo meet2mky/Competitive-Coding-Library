@@ -1,2 +1,2 @@
 # CP-Library
-Ok! Wait, We have some function written already in our library.
+This is my Comptetive Programming Library. Here, I write some of codes and functions that i use regualarly.

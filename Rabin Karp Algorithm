@@ -1,0 +1,58 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> rabin_karp(string const& text, string const& pat) {
+	vector<int> occurrence;
+	if ((int)pat.size() > (int)text.size()) return occurrence;
+	int n = text.size();
+	int m = pat.size();
+	vector<long long> pow(n+1);
+	long long p = 31;
+	long long mod = 1e9 + 9;
+	pow[0] = 1;
+	vector<long long> hash(n + 1);
+	hash[0] = 0;
+	for (int i = 1; i <=n; i++) {
+		pow[i] = (pow[i - 1] * p) % mod;
+	}
+	for (int i = 1; i <= n; i++) {
+		hash[i] = (hash[i - 1] + (text[i - 1] - 'a' + 1) * pow[i - 1]) % mod;
+	}
+	long long hash_value = 0;
+	for (int i = 0; i < m; i++) {
+		hash_value = (hash_value + (pat[i] - 'a' + 1) * pow[i]) % mod;
+	}
+	hash_value *= pow[n];
+	hash_value %= mod;
+	for (int i = 0; i <= n - m; i++) {
+		long long h_value = ((hash[i + m] - hash[i] + mod) * pow[n - i]) % mod;
+		if (h_value == hash_value) {
+			occurrence.push_back(i);
+		}
+	}
+	return occurrence;
+}
+int main() {
+	int test;
+	cin >> test;
+	while (test--) {
+		string text, pat;
+		cout << "Enter text: ";
+		cin >> ws; // to takeout any whitespaces
+		//cin >> text;
+		getline(cin, text);
+		cout << "Entet pattern: ";
+		cin >> ws; // to takeout any whitespaces
+		getline(cin, pat);
+		//cin >> pat;
+		vector<int> occ = rabin_karp(text, pat);
+		cout << "Pattern occurs at: ";
+		for (auto x : occ) {
+			cout << x << ' ';
+		}
+		cout << endl;
+	}
+	return 0;
+}

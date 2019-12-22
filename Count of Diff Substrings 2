@@ -1,0 +1,53 @@
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+vector<int> prefix_fun(string const& s) {
+	int n = (int)s.size();
+	vector<int> pi(n);
+	pi[0] = 0;
+	for (int i = 1; i < n; i++) {
+		int j = pi[i - 1];
+		while (j > 0 && s[j]!= s[i]) {
+			j = pi[j - 1];
+		}
+		if (s[j] == s[i]) {
+			j++;
+		}
+		pi[i] = j;
+	}
+	return pi;
+}
+int max_vec(vector<int> const& vec) {
+	int mx = -1;
+	for (auto x : vec) {
+		mx = max(x, mx);
+	}
+	return mx;
+}
+long long count_diff_subs(string const& s){
+	long long cnt = 0;
+	string tmp = "";
+	for (int i = 0; i < (int)s.size(); i++) {
+		cnt += (int)tmp.size();
+		cnt += 1;
+		tmp += s[i];
+		reverse(tmp.begin(), tmp.end());
+		cnt -= max_vec(prefix_fun(tmp));
+		reverse(tmp.begin(), tmp.end());
+	}
+	return cnt;
+}
+int main() {
+	int test;
+	cout << "Enter number of test: ";
+	cin >> test;
+	while (test--) {
+		cout << "Enter string: ";
+		string s;
+		cin >> s;
+		cout << "Number of different substrings are:" << count_diff_subs(s) << endl;
+	}
+	return 0;
+}

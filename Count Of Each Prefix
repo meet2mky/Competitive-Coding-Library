@@ -1,0 +1,49 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int> prefix_fun(string const& s) {
+	int n = (int)s.size();
+	vector<int> pi(n);
+	pi[0] = 0;
+	for (int i = 1; i < n; i++) {
+		int j = pi[i - 1];
+		while (j > 0 && s[j] != s[i]) {
+			j = pi[j - 1];
+		}
+		if (s[i] == s[j]) {
+			j++;
+		}
+		pi[i] = j;
+	}
+	return pi;
+}
+vector<int> count_of_each_prefix(string const& s) {
+	vector<int> pi = prefix_fun(s);
+	int n = (int)s.size();
+	vector<int> ans(n + 1);
+	for (int i = 0; i < n; i++) {
+		ans[pi[i]]++;
+	}
+	//  pi[i] is length of prefix ending at i & also pi[pi[i] - 1] is 
+	//  length of prefix ending at i and also pi[pi[pi[i]-1] - 1]
+	//  is ending at i
+	for (int i = n - 1; i > 0; i--) {
+		ans[pi[i - 1]] += ans[i];
+	}
+	for (int i = 0; i <= n; i++) {
+		ans[i]++;
+	}
+	return ans;
+}
+int main() {
+	cout << "Enter a string: ";
+	string s;
+	cin >> s;
+	vector<int> cnt = count_of_each_prefix(s);
+	for (int i = 1; i < (int)cnt.size(); i++) {
+		cout << "cnt of prefix of length: " << i << " is: " << cnt[i] << endl;
+	}
+	return 0;
+}

@@ -13,6 +13,30 @@ void build()
 }
 void update(int pos, int value)
 {
+    pos += n;
+    t[pos] = value;
+    for (pos >>= 1; pos > 0; pos >>= 1)
+    {
+        t[pos] = t[pos << 1] + t[pos << 1 | 1];
+    }
+}
+int query(int l, int r) // [l...r)
+{
+    int res = 0;
+    l += n;
+    r += n;
+    for (; l < r; l >>= 1, r >>= 1)
+    {
+        if (l & 1)
+        {
+            res += t[l++];
+        }
+        if (r & 1)
+        {
+            res += t[--r];
+        }
+    }
+    return res;
 }
 
 signed main()
@@ -28,5 +52,8 @@ signed main()
         cin >> t[i + n];
     }
     build();
+    cout << query(0, n) << endl;
+    update(1, 100);
+    cout << query(0, n) << endl;
     return 0;
 }

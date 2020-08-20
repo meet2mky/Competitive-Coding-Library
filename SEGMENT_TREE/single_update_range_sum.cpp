@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+// single updates & range sum query
 const int N = 2e6;
 int t[N];
 int n;
@@ -42,8 +43,8 @@ int query(int l, int r) // [l...r)
 signed main()
 {
 #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    freopen("single_update_range_sum_input.txt", "r", stdin);
+    freopen("single_update_range_sum_output.txt", "w", stdout);
 #endif
 
     cin >> n;
@@ -53,7 +54,9 @@ signed main()
     }
     build();
     cout << query(0, n) << endl;
-    update(1, 100);
+    update(1, 10);
+    cout << query(0, n) << endl;
+    update(2, 10);
     cout << query(0, n) << endl;
     return 0;
 }

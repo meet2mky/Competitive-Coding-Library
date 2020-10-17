@@ -1,0 +1,40 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++.exe build active file",
+            "command": "C:\\Program Files (x86)\\mingw-w64\\i686-8.1.0-posix-dwarf-rt_v6-rev0\\mingw32\\bin\\g++.exe",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-std=c++17",
+                "-O2",
+                "-Wshadow",
+                "-Wformat=2",
+                "-Wfloat-equal",
+                "-Wconversion",
+                "-Wlogical-op",
+                "-Wshift-overflow=2",
+                //"-fsanitize=address",
+                //"-fsanitize=undefined",
+                "-fno-sanitize-recover",
+                "-fstack-protector",
+                "-D_GLIBCXX_DEBUG_PEDANTIC",
+                "-D_GLIBCXX_DEBUG",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}",
+            ],
+            "options": {
+                "cwd": "C:\\Program Files (x86)\\mingw-w64\\i686-8.1.0-posix-dwarf-rt_v6-rev0\\mingw32\\bin",
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "version": "2.0.0"
+}

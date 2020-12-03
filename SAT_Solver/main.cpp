@@ -64,7 +64,7 @@ public:
         g.assign(n, vector<int>());
         gr.assign(n, vector<int>());
     }
-    void make_or(int not_var_a, int var_a, int not_var_b, int var_b) // var_a /\ var_b
+    void make_or(int not_var_a, int var_a, int not_var_b, int var_b) // or
     {
         int node_a = 2 * var_a;
         int node_b = 2 * var_b;
@@ -74,7 +74,7 @@ public:
             node_b = complement(node_b);
         addor(node_a, node_b);
     }
-    void make_xor(int not_var_a, int var_a, int not_var_b, int var_b) // makes xor of variables true
+    void make_xor(int not_var_a, int var_a, int not_var_b, int var_b) // xor
     {
         int node_a = 2 * var_a;
         int node_b = 2 * var_b;

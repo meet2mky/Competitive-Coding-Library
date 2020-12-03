@@ -92,7 +92,7 @@ public:
     {
         make_or(1, var_a, 1, var_a);
     }
-    void make_bicondtion(int not_var_a, int var_a, int not_var_b, int var_b) // both true or both false...opposite of xor
+    void make_bicondition(int not_var_a, int var_a, int not_var_b, int var_b) // both true or both false...opposite of xor
     {
         int node_a = 2 * var_a;
         int node_b = 2 * var_b;

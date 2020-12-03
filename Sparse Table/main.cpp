@@ -79,6 +79,7 @@ void util(int l, int r)
 int main()
 {
     freopen("input.txt", "r", stdin);
+    freopen("output.txt","w",stdout);
     cin >> n;
     arr.resize(n);
     for (int i = 0; i < n; i++)

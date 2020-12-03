@@ -1,0 +1,4 @@
+Sum of values: 3 + 4 + 5 + 1 + 2 + 3 + 2 + 1 + 23 + 3 is: 47
+Sum of values: 3 + 4 + 5 is: 12
+Sum of values: 2 + 3 + 2 + 1 + 23 is: 31
+Sum of values: 1 + 2 + 3 + 2 + 1 is: 9
